@@ -4,6 +4,11 @@
  */
 package application;
 
+import gui.LoginDialog;
+import java.awt.Image;
+import repository.ConnectionDatabase;
+import util.ImageUtil;
+
 /**
  *
  * @author alefi
@@ -15,6 +20,8 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
+        Image image = ImageUtil.loadImageFromResources("/resources/locadora.png");
+        setIconImage(image);
     }
 
     /**
@@ -26,8 +33,55 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        menuBar = new javax.swing.JMenuBar();
+        menuArquivo = new javax.swing.JMenu();
+        menuCadastro = new javax.swing.JMenu();
+        cadastroCliente = new javax.swing.JMenuItem();
+        cadastroFilme = new javax.swing.JMenuItem();
+        cadastroUsuario = new javax.swing.JMenuItem();
+        menuMovimentacao = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        menuAuxilio = new javax.swing.JMenu();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1280, 720));
+        setResizable(false);
+
+        menuArquivo.setText("Arquivo");
+        menuBar.add(menuArquivo);
+
+        menuCadastro.setText("Cadastro");
+
+        cadastroCliente.setText("Cliente");
+        menuCadastro.add(cadastroCliente);
+
+        cadastroFilme.setText("Filme");
+        menuCadastro.add(cadastroFilme);
+
+        cadastroUsuario.setText("Usuário");
+        menuCadastro.add(cadastroUsuario);
+
+        menuBar.add(menuCadastro);
+
+        menuMovimentacao.setText("Movimentação");
+
+        jMenuItem1.setText("Aluguel");
+        menuMovimentacao.add(jMenuItem1);
+
+        jMenuItem2.setText("Devolução");
+        menuMovimentacao.add(jMenuItem2);
+
+        jMenuItem3.setText("Mostrar Filmes");
+        menuMovimentacao.add(jMenuItem3);
+
+        menuBar.add(menuMovimentacao);
+
+        menuAuxilio.setText("Auxílio");
+        menuBar.add(menuAuxilio);
+
+        setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -37,7 +91,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
+            .addGap(0, 698, Short.MAX_VALUE)
         );
 
         pack();
@@ -69,9 +123,15 @@ public class MainFrame extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        ConnectionDatabase.conectar();
+        ConnectionDatabase.statusConexao();
+        ConnectionDatabase.desconectar();
         /* Create and display the form */
+        LoginDialog loginDialog = new LoginDialog(null, true);
+        loginDialog.setVisible(true); 
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new MainFrame().setVisible(true);
             }
@@ -79,5 +139,16 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem cadastroCliente;
+    private javax.swing.JMenuItem cadastroFilme;
+    private javax.swing.JMenuItem cadastroUsuario;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenu menuArquivo;
+    private javax.swing.JMenu menuAuxilio;
+    private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenu menuCadastro;
+    private javax.swing.JMenu menuMovimentacao;
     // End of variables declaration//GEN-END:variables
 }
