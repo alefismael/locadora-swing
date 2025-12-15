@@ -4,24 +4,39 @@
  */
 package application;
 
-import gui.LoginDialog;
+import gui.PrincipalPanel;
+import gui.SobreSistemaDialog;
+import gui.cadastro.ClienteCadastroPanel;
+import gui.cadastro.FilmeCadastroPanel;
+import gui.cadastro.UsuarioCadastroPanel;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Image;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
 import repository.ConnectionDatabase;
 import util.ImageUtil;
+import util.Views;
 
 /**
  *
  * @author alefi
  */
 public class MainFrame extends javax.swing.JFrame {
-
     /**
      * Creates new form MainFrame
+     * 
      */
+    private CardLayout cardLayout;
+    
     public MainFrame() {
         initComponents();
+        
         Image image = ImageUtil.loadImageFromResources("/resources/locadora.png");
         setIconImage(image);
+        this.setLocationRelativeTo(null);
+        initUi();
+        cardLayout = (CardLayout) panel.getLayout();
     }
 
     /**
@@ -33,6 +48,7 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panel = new javax.swing.JPanel();
         menuBar = new javax.swing.JMenuBar();
         menuArquivo = new javax.swing.JMenu();
         menuCadastro = new javax.swing.JMenu();
@@ -40,21 +56,35 @@ public class MainFrame extends javax.swing.JFrame {
         cadastroFilme = new javax.swing.JMenuItem();
         cadastroUsuario = new javax.swing.JMenuItem();
         menuMovimentacao = new javax.swing.JMenu();
+        movAlugar = new javax.swing.JMenuItem();
+        movDevolver = new javax.swing.JMenuItem();
+        movMostrarFilmes = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
         menuAuxilio = new javax.swing.JMenu();
+        sobreSistema = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
 
-        menuArquivo.setText("Arquivo");
+        panel.setLayout(new java.awt.CardLayout());
+
+        menuArquivo.setText("Início");
+        menuArquivo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuArquivoMouseClicked(evt);
+            }
+        });
         menuBar.add(menuArquivo);
 
         menuCadastro.setText("Cadastro");
 
         cadastroCliente.setText("Cliente");
+        cadastroCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastroClienteActionPerformed(evt);
+            }
+        });
         menuCadastro.add(cadastroCliente);
 
         cadastroFilme.setText("Filme");
@@ -65,20 +95,32 @@ public class MainFrame extends javax.swing.JFrame {
 
         menuBar.add(menuCadastro);
 
-        menuMovimentacao.setText("Movimentação");
+        menuMovimentacao.setText("Ações");
 
-        jMenuItem1.setText("Aluguel");
+        movAlugar.setText("Aluguel");
+        menuMovimentacao.add(movAlugar);
+
+        movDevolver.setText("Devolução");
+        menuMovimentacao.add(movDevolver);
+
+        movMostrarFilmes.setText("Mostrar Filmes");
+        menuMovimentacao.add(movMostrarFilmes);
+
+        jMenuItem1.setText("Alterar Senha Usuário");
         menuMovimentacao.add(jMenuItem1);
-
-        jMenuItem2.setText("Devolução");
-        menuMovimentacao.add(jMenuItem2);
-
-        jMenuItem3.setText("Mostrar Filmes");
-        menuMovimentacao.add(jMenuItem3);
 
         menuBar.add(menuMovimentacao);
 
         menuAuxilio.setText("Auxílio");
+
+        sobreSistema.setText("Sobre o Sistema");
+        sobreSistema.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sobreSistemaActionPerformed(evt);
+            }
+        });
+        menuAuxilio.add(sobreSistema);
+
         menuBar.add(menuAuxilio);
 
         setJMenuBar(menuBar);
@@ -87,15 +129,31 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1280, Short.MAX_VALUE)
+            .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 698, Short.MAX_VALUE)
+            .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void sobreSistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sobreSistemaActionPerformed
+        // TODO add your handling code here:
+        JDialog dialog = new SobreSistemaDialog(this, true);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_sobreSistemaActionPerformed
+
+    private void cadastroClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroClienteActionPerformed
+        // TODO add your handling code here:
+        cardLayout.show(panel, Views.CADASTRO_CLIENTE);
+    }//GEN-LAST:event_cadastroClienteActionPerformed
+
+    private void menuArquivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuArquivoMouseClicked
+        // TODO add your handling code here:
+        cardLayout.show(panel, Views.PAINEL_PRINCIPAL);
+    }//GEN-LAST:event_menuArquivoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -127,8 +185,8 @@ public class MainFrame extends javax.swing.JFrame {
         ConnectionDatabase.statusConexao();
         ConnectionDatabase.desconectar();
         /* Create and display the form */
-        LoginDialog loginDialog = new LoginDialog(null, true);
-        loginDialog.setVisible(true); 
+        //LoginDialog loginDialog = new LoginDialog(null, true);
+        //loginDialog.setVisible(true); 
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
@@ -137,18 +195,28 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void initUi(){
+        panel.add(new PrincipalPanel(),Views.PAINEL_PRINCIPAL);
+        panel.add(new FilmeCadastroPanel(),Views.CADASTRO_FILME);
+        panel.add(new ClienteCadastroPanel(),Views.CADASTRO_CLIENTE);
+        panel.add(new UsuarioCadastroPanel(),Views.CADASTRO_USUARIO);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem cadastroCliente;
     private javax.swing.JMenuItem cadastroFilme;
     private javax.swing.JMenuItem cadastroUsuario;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenu menuArquivo;
     private javax.swing.JMenu menuAuxilio;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu menuCadastro;
     private javax.swing.JMenu menuMovimentacao;
+    private javax.swing.JMenuItem movAlugar;
+    private javax.swing.JMenuItem movDevolver;
+    private javax.swing.JMenuItem movMostrarFilmes;
+    private javax.swing.JPanel panel;
+    private javax.swing.JMenuItem sobreSistema;
     // End of variables declaration//GEN-END:variables
 }
