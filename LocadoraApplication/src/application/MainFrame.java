@@ -32,7 +32,7 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         
-        Image image = ImageUtil.loadImageFromResources("/resources/locadora.png");
+        Image image = ImageUtil.loadImageFromResources("/resources/filme.png");
         setIconImage(image);
         this.setLocationRelativeTo(null);
         initUi();
@@ -88,9 +88,19 @@ public class MainFrame extends javax.swing.JFrame {
         menuCadastro.add(cadastroCliente);
 
         cadastroFilme.setText("Filme");
+        cadastroFilme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastroFilmeActionPerformed(evt);
+            }
+        });
         menuCadastro.add(cadastroFilme);
 
         cadastroUsuario.setText("Usuário");
+        cadastroUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastroUsuarioActionPerformed(evt);
+            }
+        });
         menuCadastro.add(cadastroUsuario);
 
         menuBar.add(menuCadastro);
@@ -137,6 +147,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void sobreSistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sobreSistemaActionPerformed
@@ -154,6 +165,16 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         cardLayout.show(panel, Views.PAINEL_PRINCIPAL);
     }//GEN-LAST:event_menuArquivoMouseClicked
+
+    private void cadastroFilmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroFilmeActionPerformed
+        // TODO add your handling code here:
+        cardLayout.show(panel, Views.CADASTRO_FILME);
+    }//GEN-LAST:event_cadastroFilmeActionPerformed
+
+    private void cadastroUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroUsuarioActionPerformed
+        // TODO add your handling code here:
+        cardLayout.show(panel, Views.CADASTRO_USUARIO);
+    }//GEN-LAST:event_cadastroUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
