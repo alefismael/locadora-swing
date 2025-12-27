@@ -5,15 +5,13 @@
 package application;
 
 import gui.PrincipalPanel;
-import gui.SobreSistemaDialog;
+import gui.dialog.SobreSistemaDialog;
 import gui.cadastro.ClienteCadastroPanel;
 import gui.cadastro.FilmeCadastroPanel;
 import gui.cadastro.UsuarioCadastroPanel;
-import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Image;
 import javax.swing.JDialog;
-import javax.swing.JPanel;
 import repository.ConnectionDatabase;
 import util.ImageUtil;
 import util.Views;

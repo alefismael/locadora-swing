@@ -4,11 +4,13 @@
  */
 package gui.cadastro;
 
+import base.BaseFormPanel;
+
 /**
  *
  * @author alefi
  */
-public class FilmeCadastroPanel extends javax.swing.JPanel{
+public class FilmeCadastroPanel extends BaseFormPanel {
 
     /**
      * Creates new form FilmeCadastroPanel
@@ -26,17 +28,15 @@ public class FilmeCadastroPanel extends javax.swing.JPanel{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setBackground(new java.awt.Color(255, 51, 51));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1280, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 698, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
